@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebGPU</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <!-- To automatically render math in text elements -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+</head>
+<body>
+    <div class="layout">
+        <div class="main-content">
+            <h2 class="center">Clicks</h2>
+            <h3 class="cursor-annotate">(i,j)</h3>
+            <img src="./assets/cursor.png" alt="mouse" class="cursor">
+            <img class="mock-screen" src="./assets/wave-eqn-unclicked.png" alt="Screen before being clicked">
+            <h3>let index = i * screen_width + j;</h3>
+            <h3>\begin{equation} \begin{bmatrix} \cdots & 0.0 & 0.0 & 0.0 & 10.0 & 0.0 & 0.0 & \cdots \end{bmatrix} \end{equation}</h3>
+            <h3>Once passed in, the GPU will use the buffer in the calculation</h3>
+        </div>
+        <div class="camera">
+        </div>
+        <div class="sub-content">
+            <h4>After the GPU is done, the buffer must be cleared before the next cycle.</h4>
+            <img class="bad-example" src="./assets/wave-eqn-bad.png" alt="When the buffer is not cleared">
+        </div>
+    </div>
+</body>
+</html>
+
+<style>
+    .mock-screen {
+        width: 30rem;
+        height: 30rem;
+    }
+
+    .cursor {
+        width: 3rem;
+        position: absolute;
+        transform: translate(31rem, 31rem);
+        opacity: 0;
+        transition: transform 1s, opacity 1s;
+    }
+
+    .cursor-annotate {
+        position: absolute;
+        transform: translate(18rem, 18rem);
+        opacity: 0;
+        transition: opacity 1s;
+    }
+
+    .main-content:hover .cursor-annotate {
+        opacity: 1;
+        transition: opacity 1s;
+        transition-delay: 0.4s;
+    }
+
+    .main-content:hover .cursor {
+        width: 3rem;
+        position: absolute;
+        transform: translate(22rem, 22rem);
+        opacity: 1;
+        transition: transform 1s, opacity 1s;
+    }
+
+    .bad-example {
+        width: 20rem;
+        margin: auto;
+    }
+</style>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="checkbox" id="speed-02" name="speed" value="Speed">
+    <label for="speed-02">Speed visible</label><br>
+
+    <input type="checkbox" id="accel-02" name="accel" value="Accel">
+    <label for="accel-02">Acceleration visible</label><br>
+
+    <input type="checkbox" id="laplace-02" name="laplace" value="Laplacian">
+    <label for="laplace-02">Laplacian visible</label><br>
+
+    <input type="checkbox" id="energy-02" name="energy" value="Energy">
+    <label for="energy-02">Energy visible</label><br>
+</body>
+</html>
+
+<script>
+    setupReplicant('#speed-02', '02-spd-visible');
+    setupReplicant('#accel-02', '02-accel-visible');
+    setupReplicant('#laplace-02', '02-laplace-visible');
+    setupReplicant('#energy-02', '02-energy-visible');
+
+    function setupReplicant(checkId, repName) {
+        const checkBox = document.querySelector(checkId);
+        const rep = nodecg.Replicant(repName, {devaultValue: false});
+        checkBox.addEventListener('change', (event) => {
+            rep.value = event.currentTarget.checked;
+        });
+    }
+</script>

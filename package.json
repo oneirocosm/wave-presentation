@@ -1,0 +1,95 @@
+{
+  "name": "wave-presentation",
+  "version": "1.0.0",
+  "description": "A bundle for giving my wave equation presentation",
+  "author": "oneirocosm",
+  "license": "ISC",
+  "nodecg": {
+    "compatibleRange": "^1.9",
+    "dashboardPanels": [
+      {
+        "name": "02-equation",
+        "title": "02: Equation",
+        "width": 2,
+        "file": "02-equation.html"
+      },
+      {
+        "name": "07-walls",
+        "title": "07: Walls",
+        "width": 3,
+        "file": "07-walls.html"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "01-title.html",
+        "width": 1920,
+        "height": 1080,
+        "singleInstance": false
+      },
+      {
+        "file": "02-equation.html",
+        "width": 1920,
+        "height": 1080,
+        "singleInstance": false
+      },
+      {
+        "file": "03-discretize.html",
+        "width": 1920,
+        "height": 1080,
+        "singleInstance": false
+      },
+      {
+        "file": "04-webgpu.html",
+        "width": 1920,
+        "height": 1080,
+        "singleInstance": false
+      },
+      {
+        "file": "05-data.html",
+        "width": 1920,
+        "height": 1080,
+        "singleInstance": false
+      },
+      {
+        "file": "06-clicks.html",
+        "width": 1920,
+        "height": 1080,
+        "singleInstance": false
+      },
+      {
+        "file": "07-walls.html",
+        "width": 1920,
+        "height": 1080,
+        "singleInstance": false
+      },
+      {
+        "file": "08-energies.html",
+        "width": 1920,
+        "height": 1080,
+        "singleInstance": false
+      },
+      {
+        "file": "09-other.html",
+        "width": 1920,
+        "height": 1080,
+        "singleInstance": false
+      },
+      {
+        "file": "10-demo.html",
+        "width": 1920,
+        "height": 1080,
+        "singleInstance": false
+      },
+      {
+        "file": "11-future.html",
+        "width": 1920,
+        "height": 1080,
+        "singleInstance": false
+      }
+    ]
+  },
+  "dependencies": {
+    "katex": "^0.16.4"
+  }
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title Page</title>
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="layout">
+        <div class="main-content title-container">
+            <h1 class="center">Wave Equation Visuals</h1>
+            <h2 class="center">A presentation by</br> Colton Crowe</h2>
+        </div>
+        <div class="camera">
+        </div>
+        <div class="sub-content">
+            <img src="./assets/wave-eqn.png" alt="My wave equation simulator with triangle walls and one click">
+        </div>
+    </div>
+    
+</body>
+</html>
+
+<style>
+    .title-container {
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+    img {
+        object-fit: contain;
+        width: 100%;
+        height: 40vh;
+    }
+</style>

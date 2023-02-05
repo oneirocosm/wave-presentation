@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebGPU</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <!-- To automatically render math in text elements -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+</head>
+<body>
+    <div class="layout">
+        <div class="main-content">
+            <h2 class="center">WebGPU</h2>
+            <h3 class="center">Sending data to the GPU</h3>
+            <div class="data-transfer-container">
+                <div class="data-transfer-cpu-matrix">
+                    <h3>\begin{equation} \begin{bmatrix} 0 & 1 & 2 \\ 10 & 11 & 12 \\ 20 & 21 & 22\\ & \vdots \end{bmatrix} \end{equation}</h3>
+                </div>
+                <div class="data-transfer-cpu-desc">
+                    <h3>2d data stored as an array of arrays</h3>
+                </div>
+                <div class="data-transfer-gpu-buffer left-eqn">
+                    <h3>\begin{equation} \begin{bmatrix} 0 & 1 & 2 & 10 & 11 & 12 & 20 & 21 & 22 & \cdots \end{bmatrix} \end{equation}</h3>
+                </div>
+                <div class="data-transfer-gpu-desc center">
+                    <h3>1d data stored in a GPU buffer</h3>
+                </div>
+
+            </div>
+        </div>
+        <div class="camera">
+        </div>
+        <div class="sub-content">
+            <h3>
+                \begin{equation}
+                    \text{CPU:} \begin{bmatrix} \square & \square & \square \end{bmatrix}
+                \end{equation}
+                \begin{equation}
+                    \phantom{CPU}
+                \end{equation}
+                \begin{equation}
+                    \text{GPU:} \begin{bmatrix} \square & \square & \square \end{bmatrix}
+                \end{equation}
+            </h3>
+        </div>
+    </div>
+</body>
+</html>
+
+<style>
+    .data-transfer-container {
+        display: grid;
+        grid: 3.5fr 1fr 1fr / 1fr 1fr;
+        grid-template-areas:
+            "matrix-cpu desc-cpu"
+            "buffer-gpu buffer-gpu"
+            "desc-gpu desc-gpu"
+    }
+    .data-transfer-cpu-matrix {
+        grid-area: matrix-cpu;
+        padding-top: 5rem;
+    }
+    .data-transfer-cpu-desc {
+        grid-area: desc-cpu;
+        padding-top: 13rem;
+    }
+    .data-transfer-gpu-buffer {
+        grid-area: buffer-gpu;
+    }
+    .data-transfer-gpu-desc {
+        grid-area: desc-gpu;
+    }
+</style>

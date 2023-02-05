@@ -1,0 +1,103 @@
+:root {
+    --color-chalk: #e0dbd1;
+}
+
+@font-face {
+    font-family: open-sans;
+    src: url("./assets/OpenSans-Regular.woff2");
+}
+
+html {
+    font-family: open-sans;
+}
+
+body {
+    background-image: url("./assets/chalkboard.jpg");
+    height: 100vh;
+}
+
+h1 {
+    color: var(--color-chalk);
+    font-size: 10rem;
+    text-align: center;
+    margin: 0;
+}
+
+h2 {
+    color: var(--color-chalk);
+    font-size: 5rem;
+    margin: 0;
+}
+
+h3 {
+    color: var(--color-chalk);
+    font-size: 3rem;
+    margin: 0;
+}
+
+h4 {
+    color: var(--color-chalk);
+    font-size: 2.1rem;
+    margin: 0;
+}
+
+h3 li {
+    margin-left: 7rem;
+}
+
+p {
+    color: var(--color-chalk);
+}
+
+.layout {
+    display: grid;
+    height: 100%;
+    grid: 1fr 1fr / 48fr 23fr;
+    gap: 2rem 2rem;
+    grid-template-areas:
+        "main camera"
+        "main sub";
+    padding: 2rem;
+}
+
+.main-content {
+    grid-area: main;
+}
+
+.camera {
+    grid-area: camera;
+}
+
+.sub-content {
+    grid-area: sub;
+}
+
+.center {
+    text-align: center;
+}
+
+.center-xy {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.transparent {
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.opaque {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 2s, visibility 2s ease-out;
+}
+
+.eqn-num {
+    display: none !important;
+}
+
+.left-eqn .katex-display > .katex {
+    display: block;
+    text-align: left;
+}

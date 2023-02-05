@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equation</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <!-- To automatically render math in text elements -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+</head>
+<body>
+    <div class="layout">
+        <div class="main-content">
+            <h2>The classical wave equation:</h2>
+            <h2 class="center">\begin{equation} \frac{1}{v^2}\frac{\partial^2u}{{\partial t}^2} - \nabla^2u = 0 \end{equation}</h2>
+            <div class="explanation-container">
+                <div class="explanation-accel accel-rep transparent">
+                    <h3 class="center">Sort of like an acceleration</h3>
+                </div>
+                <div class="explanation-laplace laplace-rep transparent">
+                    <h3>\begin{equation} \nabla^2u = \frac{\partial^2u}{{\partial x}^2} + \frac{\partial^2u}{{\partial y}^2} \end{equation}</h2>
+                    <h3 class="center">Sort of like a spatial "curvature"</h3>
+                </div>
+                <div class="explanation-speed speed-rep transparent">
+                    <h3>The speed of the wave</h3>
+                </div>
+
+            </div>
+            <p id="wave-eqn"></p>
+        </div>
+        <div class="camera">
+        </div>
+        <div class="sub-content energy-explanation energy-rep transparent">
+            <h3>A lot of possibilities ...</h3>
+            <ul>
+                <h3><li>height</li></h3>
+                <h3><li>electric field</li></h3>
+                <h3><li>energy</li></h3>
+                <h3><li>etc.</li></h3>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+
+<style>
+    .explanation-container {
+        display: grid;
+        grid: 5fr 1fr / 1fr 1fr;
+        grid-template-areas:
+            "accel laplace"
+            "speed na";
+    }
+    .explanation-accel {
+        margin-left: 10rem;
+        margin-top: 7rem;
+        grid-area: accel;
+    }
+
+    .explanation-laplace {
+        grid-area: laplace;
+    }
+
+    .explanation-speed {
+        grid-area: speed;
+    }
+
+</style>
+
+<script>
+    setupReplicant("02-spd-visible", ".speed-rep");
+    setupReplicant("02-accel-visible", ".accel-rep");
+    setupReplicant("02-laplace-visible", ".laplace-rep");
+    setupReplicant("02-energy-visible", ".energy-rep");
+
+    function setupReplicant(repName, className) {
+        const replicant = nodecg.Replicant(repName, {defaultValue: false});
+        const elems = document.querySelectorAll(className);
+
+        replicant.on('change', (newValue, oldValue) => {
+            if (newValue == true) {
+                elems.forEach((elem) => {
+                    elem.classList.remove("transparent");
+                    elem.classList.add("opaque");
+                });
+            } else {
+                elems.forEach((elem) => {
+                    elem.classList.add("transparent");
+                    elem.classList.remove("opaque");
+                });
+            }
+        });
+    }
+</script>

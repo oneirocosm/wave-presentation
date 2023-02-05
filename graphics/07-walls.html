@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebGPU</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="layout">
+        <div class="main-content texture-convert">
+            <h2 class="center title">Walls</h2>
+            <h3 class="center explain">Use a Texture!!!  Then convert it to black and white!</h3>
+            <div class="tri-base left-triangle transparent">
+                <img class="" src="./assets/triangle.jpg" alt="Triangle before conversion">
+            </div>
+            <div class="tri-convert right-triangle transparent">
+                <img class="" src="./assets/wave-eqn-unclicked.png" alt="Triangle after conversion">
+            </div>
+            <div class="square-base left-square transparent">
+                <img class="" src="./assets/blank-square.jpg" alt="Square before conversion">
+            </div>
+            <div class="square-convert right-square transparent">
+                <img class="" src="./assets/square-out.png" alt="Square after conversion">
+            </div>
+            <div class="complex-base left-charjabug transparent">
+                <img class="" src="./assets/charjabug.jpg" alt="Charjabug before conversion">
+            </div>
+            <div class="complex-convert right-charjabug transparent">
+                <img class="" src="./assets/charjabug-out.png" alt="Charjabug after conversion">
+            </div>
+        </div>
+        <div class="camera">
+        </div>
+        <div class="sub-content note transparent">
+            <h3>Note: Requires a sampler to resolve resolution differences</h3>
+            <br/>
+            <br/>
+            <h3>In this case, nearest neighbor works well</h3>
+        </div>
+    </div>
+</body>
+</html>
+
+<style>
+    .texture-convert {
+        display: grid;
+        grid: 1.5fr 1fr 2.5fr 2.5fr 2.5fr / 1fr 1fr;
+        grid-template-areas:
+            "title title"
+            "explain explain"
+            "tri-base tri-convert"
+            "square-base square-convert"
+            "complex-base complex-convert";
+        row-gap: 2rem;
+    }
+
+    img {
+        width: 12rem;
+    }
+
+    .title {
+        grid-area: title;
+    }
+
+    .explain {
+        grid-area: explain;
+    }
+
+    .tri-base {
+        grid-area: tri-base;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .tri-convert {
+        grid-area: tri-convert;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .square-base {
+        grid-area: square-base;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .square-convert {
+        grid-area: square-convert;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .complex-base {
+        grid-area: complex-base;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .complex-convert {
+        grid-area: complex-convert;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<script>
+    setupRadioReplicant("07-triangle", [".left-triangle", ".right-triangle"]);
+    setupRadioReplicant("07-square", [".left-square", ".right-square"]);
+    setupRadioReplicant("07-charjabug", [".left-charjabug", ".right-charjabug"]);
+    setupCheckReplicant("07-note", ".note");
+
+    function setupRadioReplicant(repName, classNames) {
+        const replicant = nodecg.Replicant(repName, {defaultValue: 0});
+
+        replicant.on('change', (newValue, oldValue) => {
+            if (newValue > oldValue) {
+                const changedNames = classNames.slice(oldValue, newValue).join(", ");
+                let changedElems;
+                if (changedNames == "") {
+                    changedElems = [];
+                } else {
+                    changedElems = document.querySelectorAll(changedNames);
+                }
+                changedElems.forEach((elem) => {
+                    elem.classList.remove("transparent");
+                    elem.classList.add("opaque");
+                });
+            } else {
+                const changedNames = classNames.slice(newValue, oldValue + 1).join(", ");
+                let changedElems;
+                if (changedNames == "") {
+                    changedElems = [];
+                } else {
+                    changedElems = document.querySelectorAll(changedNames);
+                }
+                changedElems.forEach((elem) => {
+                    elem.classList.add("transparent");
+                    elem.classList.remove("opaque");
+                });
+            }
+        });
+    }
+
+    function setupCheckReplicant(repName, className) {
+        const replicant = nodecg.Replicant(repName, {defaultValue: false});
+        const elems = document.querySelectorAll(className);
+
+        replicant.on('change', (newValue, oldValue) => {
+            if (newValue == true) {
+                elems.forEach((elem) => {
+                    elem.classList.remove("transparent");
+                    elem.classList.add("opaque");
+                });
+            } else {
+                elems.forEach((elem) => {
+                    elem.classList.add("transparent");
+                    elem.classList.remove("opaque");
+                });
+            }
+        });
+    }
+
+</script>

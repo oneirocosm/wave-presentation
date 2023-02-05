@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebGPU</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <!-- To automatically render math in text elements -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+</head>
+<body>
+    <div class="layout">
+        <div class="main-content">
+            <h2>Finite Difference Approximation:</h2>
+            <div class="equation-space">
+                <h3 class="left-eqn">\begin{equation} \frac{1}{v^2}\frac{\partial^2u(x,y,t)}{{\partial t}^2} - \nabla^2u(x,y,t) = 0 \end{equation}</h3>
+                <p class="left-eqn helper-eqn">\begin{equation} \nabla^2u(x,y,t) \approx \frac{u(x + \Delta x, y, t) + u(x - \Delta x, y, t) + u(x, y + \Delta y, t) + u(x, y - \Delta y, t) -4u(x, y, z)}{(\Delta s)^2} \end{equation}</p>
+                <p class="left-eqn helper-eqn">\begin{equation} \frac{\partial^2u(x,y,t)}{{\partial t}^2} \approx \frac{u(x,y,t + \Delta t) + u(x, y, t - \Delta t) - 2u(x,y,t)}{(\Delta t)^2} \end{equation}</p>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <hr>
+                <br>
+                <br>
+                <p class="left-eqn">\begin{equation} \frac{u(x,y,t + \Delta t) + u(x, y, t - \Delta t) - 2u(x,y,t)}{v^2(\Delta t)^2} - \frac{u(x + \Delta x, y, t) + u(x - \Delta x, y, t) + u(x, y + \Delta y, t) + u(x, y - \Delta y, t) -4u(x, y, z)}{(\Delta s)^2}  = 0 \end{equation}</p>
+                <p class="left-eqn answer">\begin{equation} u(x,y,t + \Delta t) = \frac{v^2(\Delta t)^2}{(\Delta s)^2} \Big[ u(x + \Delta x, y, t) + u(x - \Delta x, y, t) + u(x, y + \Delta y, t) + u(x, y - \Delta y, t) -4u(x, y, z) \Big] + 2u(x,y,t) - u(x, y, t - \Delta t) \end{equation}</p>
+            </div>
+        </div>
+        <div class="camera">
+        </div>
+        <div class="sub-content">
+        </div>
+    </div>
+</body>
+</html>
+
+<style>
+    .answer {
+        font-size: 1.5rem;
+        border: 2px solid var(--color-chalk);
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    .helper-eqn {
+        margin-left: 25rem;
+    }
+
+    .equation-space {
+        display: flex;
+        flex-direction: column;
+        justify-items: left;
+    }
+</style>
