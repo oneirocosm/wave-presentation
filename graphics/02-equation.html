@@ -35,7 +35,7 @@
         </div>
         <div class="camera">
         </div>
-        <div class="sub-content energy-explanation energy-rep transparent">
+        <div class="sub-content explanation-energy energy-rep transparent">
             <h3>A lot of possibilities ...</h3>
             <ul>
                 <h3><li>height</li></h3>
@@ -60,14 +60,21 @@
         margin-left: 10rem;
         margin-top: 7rem;
         grid-area: accel;
+        transition: opacity 1s;
     }
 
     .explanation-laplace {
         grid-area: laplace;
+        transition: opacity 1s;
     }
 
     .explanation-speed {
         grid-area: speed;
+        transition: opacity 1s;
+    }
+
+    .explanation-energy {
+        transition: opacity 1s;
     }
 
 </style>
@@ -86,12 +93,10 @@
             if (newValue == true) {
                 elems.forEach((elem) => {
                     elem.classList.remove("transparent");
-                    elem.classList.add("opaque");
                 });
             } else {
                 elems.forEach((elem) => {
                     elem.classList.add("transparent");
-                    elem.classList.remove("opaque");
                 });
             }
         });

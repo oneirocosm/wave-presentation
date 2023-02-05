@@ -74,6 +74,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        transition: opacity 1s;
     }
 
     .tri-convert {
@@ -81,6 +82,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        transition: opacity 1s;
     }
 
     .square-base {
@@ -88,6 +90,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        transition: opacity 1s;
     }
 
     .square-convert {
@@ -95,6 +98,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        transition: opacity 1s;
     }
 
     .complex-base {
@@ -102,6 +106,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        transition: opacity 1s;
     }
 
     .complex-convert {
@@ -109,6 +114,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        transition: opacity 1s;
+    }
+
+    .note {
+        transition: opacity 1s;
     }
 </style>
 
@@ -124,27 +134,15 @@
         replicant.on('change', (newValue, oldValue) => {
             if (newValue > oldValue) {
                 const changedNames = classNames.slice(oldValue, newValue).join(", ");
-                let changedElems;
-                if (changedNames == "") {
-                    changedElems = [];
-                } else {
-                    changedElems = document.querySelectorAll(changedNames);
-                }
+                const changedElems = document.querySelectorAll(changedNames);
                 changedElems.forEach((elem) => {
                     elem.classList.remove("transparent");
-                    elem.classList.add("opaque");
                 });
             } else {
                 const changedNames = classNames.slice(newValue, oldValue + 1).join(", ");
-                let changedElems;
-                if (changedNames == "") {
-                    changedElems = [];
-                } else {
-                    changedElems = document.querySelectorAll(changedNames);
-                }
+                const changedElems = document.querySelectorAll(changedNames);
                 changedElems.forEach((elem) => {
                     elem.classList.add("transparent");
-                    elem.classList.remove("opaque");
                 });
             }
         });
@@ -158,12 +156,10 @@
             if (newValue == true) {
                 elems.forEach((elem) => {
                     elem.classList.remove("transparent");
-                    elem.classList.add("opaque");
                 });
             } else {
                 elems.forEach((elem) => {
                     elem.classList.add("transparent");
-                    elem.classList.remove("opaque");
                 });
             }
         });

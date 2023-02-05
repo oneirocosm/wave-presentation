@@ -84,13 +84,6 @@ p {
 
 .transparent {
     opacity: 0;
-    transition: opacity 1s;
-}
-
-.opaque {
-    visibility: visible;
-    opacity: 1;
-    transition: opacity 2s, visibility 2s ease-out;
 }
 
 .eqn-num {
