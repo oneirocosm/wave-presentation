@@ -9,24 +9,127 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <div class="layout">
+    <div class="">
         <div class="main-content">
-            <h2 class="center">Data</h2>
-            <h3>Data needed:</h3>
+            <h2 class="off-center">Data</h2>
             <ul>
-                <h3><li>Clicks</li></h3>
+                <h3><li>Inputs (clicks)</li></h3>
                 <h3><li>Walls</li></h3>
                 <h3><li>Energies</li></h3>
                 <h3><li>Other</li></h3>
             </ul>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="diagram center-xy">
+                <h3 class="diagram-inputs diagram-element">inputs</h3>
+                <h3 class="diagram-energies diagram-element">energies</h3>
+                <h3 class="diagram-others diagram-element">others</h3>
+                <h3 class="diagram-walls diagram-element">walls</h3>
+                <h3 class="diagram-updated diagram-element">new energy</h3>
+                <h3 class="diagram-outputs diagram-element">output color</h3>
+            </div>
         </div>
         <div class="camera">
         </div>
         <div class="sub-content">
         </div>
     </div>
+    <svg id="diagram-arrow-1" class="red-arrow" width="400" height="400" viewBox="0 0 30 30" fill="none">
+      <defs>
+        <marker id="arrow-point" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M0,-5L6,0L0,5" class="arrowHead"></path>
+        </marker>
+      </defs>
+      <path d="M 0 17 L 3 17 C 5 17 5 17 5 14 L 5 10 C 5 8 5 8 7 8 M 0 0 L 8 0 C 10 0 10 0 10 2 L 10 6 C 10 8 10 8 12 8 M 0 24 L 13 24 C 15 24 15 24 15 22 L 15 10 C 15 8 15 8 17 8 M 0 8 L 23 8" stroke="currentColor" stroke-width="0.7" marker-end="url(#arrow-point)"></path>
+    </svg>
+    <svg id="diagram-arrow-2" class="red-arrow" width="400" height="400" viewBox="0 0 30 30" fill="none">
+      <defs>
+        <marker id="arrow-point" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M0,-5L6,0L0,5" class="arrowHead"></path>
+        </marker>
+      </defs>
+      <path d="M 0 0 23 0" stroke="currentColor" stroke-width="0.7" marker-end="url(#arrow-point)"></path>
+    </svg>
+    <svg id="diagram-arrow-3" class="red-arrow" width="400" height="400" viewBox="0 0 30 30" fill="none">
+      <defs>
+        <marker id="arrow-point" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M0,-5L6,0L0,5" class="arrowHead"></path>
+        </marker>
+      </defs>
+      <path d="M 3 8 L 2 8 C 0 8 0 8 0 6 M 60 2.5 L 60 22 C 60 24 60 24 58 24 L 2 24 C 0 24 0 24 0 22 L 0 2 C 0 0 0 0 2 0" stroke="currentColor" stroke-width="0.7" marker-end="url(#arrow-point)"></path>
+    </svg>
 </body>
 </html>
 
 <style>
+    .diagram {
+        display: grid;
+        grid: 1fr 1fr 1fr 1fr / 1fr 1fr 1fr;
+        grid-template-areas:
+            "inputs unused1 unused2"
+            "energies updated outputs"
+            "others unused3 unused4"
+            "walls unused5 unused6";
+        column-gap: 20rem;
+        row-gap: 2rem;
+        margin-left: 15rem;
+        overflow: visible;
+        margin: 0rem 10rem;
+    }
+
+    .off-center {
+        margin-left: 34rem;
+    }
+
+    .diagram-element {
+        border: 3px solid var(--color-chalk);
+        border-radius: 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .diagram-inputs {
+        grid-area: inputs;
+    }
+
+    .diagram-energies {
+        grid-area: energies;
+    }
+
+    .diagram-others {
+        grid-area: others;
+    }
+
+    .diagram-walls {
+        grid-area: walls;
+    }
+
+    .diagram-updated {
+        grid-area: updated;
+    }
+
+    .diagram-outputs {
+        grid-area: outputs;
+    }
+
+    .red-arrow {
+        position: absolute;
+        overflow: visible;
+        color: var(--color-chalk-red);
+    }
+
+    #diagram-arrow-1 {
+        transform: translate(30rem, -23rem);
+    }
+
+    #diagram-arrow-2 {
+        transform: translate(70rem, -16rem);
+    }
+    #diagram-arrow-3 {
+        transform: translate(7.5rem, -16rem);
+    }
 </style>

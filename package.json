@@ -20,6 +20,12 @@
         "file": "03-discretize.html"
       },
       {
+        "name": "04-webgpu",
+        "title": "04: WebGPU",
+        "width": 3,
+        "file": "04-webgpu.html"
+      },
+      {
         "name": "07-walls",
         "title": "07: Walls",
         "width": 3,

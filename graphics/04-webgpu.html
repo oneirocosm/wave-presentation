@@ -19,16 +19,16 @@
             <h2 class="center">WebGPU</h2>
             <h3 class="center">Sending data to the GPU</h3>
             <div class="data-transfer-container">
-                <div class="data-transfer-cpu-matrix">
+                <div class="data-transfer-cpu-matrix two-d-rep transparent">
                     <h3>\begin{equation} \begin{bmatrix} 0 & 1 & 2 \\ 10 & 11 & 12 \\ 20 & 21 & 22\\ & \vdots \end{bmatrix} \end{equation}</h3>
                 </div>
-                <div class="data-transfer-cpu-desc">
+                <div class="data-transfer-cpu-desc two-d-rep transparent">
                     <h3>2d data stored as an array of arrays</h3>
                 </div>
-                <div class="data-transfer-gpu-buffer left-eqn">
+                <div class="data-transfer-gpu-buffer left-eqn one-d-rep transparent">
                     <h3>\begin{equation} \begin{bmatrix} 0 & 1 & 2 & 10 & 11 & 12 & 20 & 21 & 22 & \cdots \end{bmatrix} \end{equation}</h3>
                 </div>
-                <div class="data-transfer-gpu-desc center">
+                <div class="data-transfer-gpu-desc center one-d-rep transparent">
                     <h3>1d data stored in a GPU buffer</h3>
                 </div>
 
@@ -36,7 +36,7 @@
         </div>
         <div class="camera">
         </div>
-        <div class="sub-content">
+        <div class="sub-content notes-skel-rep transparent">
             <h3>
                 \begin{equation}
                     \text{CPU:} \begin{bmatrix} \square & \square & \square \end{bmatrix}
@@ -50,6 +50,38 @@
             </h3>
         </div>
     </div>
+    <svg id="transform-arrow" class="arrow one-d-rep transparent" width="400" height="400" viewBox="0 0 30 30" fill="none">
+      <defs>
+        <marker id="arrow-point" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M0,-5L6,0L0,5" class="arrowHead"></path>
+        </marker>
+      </defs>
+      <path d="M 0 0 L 0 6" stroke="currentColor" stroke-width="1" marker-end="url(#arrow-point)"></path>
+    </svg>
+    <svg id="notes-arrow-1" class="arrow notes-arr1-rep transparent" width="400" height="400" viewBox="0 0 30 30" fill="none">
+      <defs>
+        <marker id="arrow-point" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M0,-5L6,0L0,5" class="arrowHead"></path>
+        </marker>
+      </defs>
+      <path d="M 0 0 L 0 11" stroke="currentColor" stroke-width="0.7" marker-end="url(#arrow-point)"></path>
+    </svg>
+    <svg id="notes-arrow-2" class="arrow notes-arr2-rep transparent" width="400" height="400" viewBox="0 0 30 30" fill="none">
+      <defs>
+        <marker id="arrow-point" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M0,-5L6,0L0,5" class="arrowHead"></path>
+        </marker>
+      </defs>
+      <path d="M 0 0 L 0 11" stroke="currentColor" stroke-width="0.7" marker-end="url(#arrow-point)"></path>
+    </svg>
+    <svg id="notes-arrow-3" class="arrow notes-arr3-rep transparent" width="400" height="400" viewBox="0 0 30 30" fill="none">
+      <defs>
+        <marker id="arrow-point" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M0,-5L6,0L0,5" class="arrowHead"></path>
+        </marker>
+      </defs>
+      <path d="M 0 0 L 0 11" stroke="currentColor" stroke-width="0.7" marker-end="url(#arrow-point)"></path>
+    </svg>
 </body>
 </html>
 
@@ -76,4 +108,50 @@
     .data-transfer-gpu-desc {
         grid-area: desc-gpu;
     }
+
+    .two-d-rep, .one-d-rep, .notes-skel-rep, .notes-arr1-rep, .notes-arr2-rep, .notes-arr3-rep {
+        transition: opacity 1s;
+    }
+
+    #transform-arrow {
+        transform: translate(25rem, -22rem);
+    }
+
+    #notes-arrow-1 {
+        transform: translate(97.75rem, -25rem);
+    }
+    #notes-arrow-2 {
+        transform: translate(104.3rem, -25rem);
+    }
+    #notes-arrow-3 {
+        transform: translate(110.8rem, -25rem);
+    }
 </style>
+
+<script>
+    const stepReplicant = nodecg.Replicant("04-data", {devaultValue: 0});
+    const genReplicant = nodecg.Replicant("04-gen", {devaultValue: 0});
+    NodeCG.waitForReplicants(stepReplicant).then(() => {
+        setupRadioReplicant(stepReplicant, [".two-d-rep", ".one-d-rep"]);
+        setupRadioReplicant(genReplicant, [".notes-skel-rep", ".notes-arr1-rep", ".notes-arr2-rep", ".notes-arr3-rep"]);
+    });
+
+    function setupRadioReplicant(replicant, classNames) {
+        replicant.on('change', (newValue, oldValue) => {
+            console.log(newValue);
+            const changedElems = document.querySelectorAll(classNames.join(", "));
+            classNames.forEach((className, i) => {
+                const elems = document.querySelectorAll(className);
+                if (newValue > i) {
+                    elems.forEach((elem) => {
+                        elem.classList.remove("transparent");
+                    });
+                } else {
+                    elems.forEach((elem) => {
+                        elem.classList.add("transparent");
+                    });
+                }
+            });
+        });
+    }
+</script>
