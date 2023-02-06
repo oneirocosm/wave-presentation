@@ -22,16 +22,26 @@
 </html>
 
 <script>
-    setupReplicant('#speed-02', '02-spd-visible');
-    setupReplicant('#accel-02', '02-accel-visible');
-    setupReplicant('#laplace-02', '02-laplace-visible');
-    setupReplicant('#energy-02', '02-energy-visible');
+    const spdReplicant = nodecg.Replicant("02-spd-visible", {devaultValue: false});
+    const accelReplicant = nodecg.Replicant("02-accel-visible", {devaultValue: false});
+    const laplaceReplicant = nodecg.Replicant("02-laplace-visible", {devaultValue: false});
+    const energyReplicant = nodecg.Replicant("02-energy-visible", {devaultValue: false});
+    NodeCG.waitForReplicants(spdReplicant, accelReplicant, laplaceReplicant, energyReplicant).then(() => {
+        setupReplicant('#speed-02', spdReplicant);
+        setupReplicant('#accel-02', accelReplicant);
+        setupReplicant('#laplace-02', laplaceReplicant);
+        setupReplicant('#energy-02', energyReplicant);
+    });
 
-    function setupReplicant(checkId, repName) {
+    function setupReplicant(checkId, replicant) {
         const checkBox = document.querySelector(checkId);
-        const rep = nodecg.Replicant(repName, {devaultValue: false});
         checkBox.addEventListener('change', (event) => {
-            rep.value = event.currentTarget.checked;
+            replicant.value = event.currentTarget.checked;
+        });
+        replicant.on("change", (newValue) => {
+            if (replicant.value != checkBox.checked) {
+                replicant.value = checkBox.checked;
+            }
         });
     }
 </script>

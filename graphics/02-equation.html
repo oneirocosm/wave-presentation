@@ -144,13 +144,18 @@
 </style>
 
 <script>
-    setupReplicant("02-spd-visible", ".speed-rep");
-    setupReplicant("02-accel-visible", ".accel-rep");
-    setupReplicant("02-laplace-visible", ".laplace-rep");
-    setupReplicant("02-energy-visible", ".energy-rep");
+    const spdReplicant = nodecg.Replicant("02-spd-visible", {defaultValue: false});
+    const accelReplicant = nodecg.Replicant("02-accel-visible", {defaultValue: false});
+    const laplaceReplicant = nodecg.Replicant("02-laplace-visible", {defaultValue: false});
+    const energyReplicant = nodecg.Replicant("02-energy-visible", {defaultValue: false});
+    NodeCG.waitForReplicants(spdReplicant, accelReplicant, laplaceReplicant, energyReplicant).then(() => {
+        setupReplicant(spdReplicant, ".speed-rep");
+        setupReplicant(accelReplicant, ".accel-rep");
+        setupReplicant(laplaceReplicant, ".laplace-rep");
+        setupReplicant(energyReplicant, ".energy-rep");
+    });
 
-    function setupReplicant(repName, className) {
-        const replicant = nodecg.Replicant(repName, {defaultValue: false});
+    function setupReplicant(replicant, className) {
         const elems = document.querySelectorAll(className);
 
         replicant.on('change', (newValue, oldValue) => {
