@@ -17,25 +17,25 @@
     <div class="layout">
         <div class="main-content">
             <h2 class="center">Inputs (Clicks)</h2>
-            <h3 class="cursor-annotate">(i,j)</h3>
+            <h3 class="cursor-annotate analysis-rep transparent">(i,j)</h3>
             <img src="./assets/cursor.png" alt="mouse" class="cursor">
             <div class="click-example">
-                <img class="mock-screen" src="./assets/wave-eqn-unclicked.png" alt="Screen before being clicked">
+                <img class="mock-screen screen-rep transparent" src="./assets/wave-eqn-unclicked.png" alt="Screen before being clicked">
                 <div class="center-xy">
-                    <h3 class="click-text">let index = i * screen_width + j;</h3>
+                    <h3 class="click-text analysis-rep transparent">let index = i * screen_width + j;</h3>
                 </div>
             </div>
-            <h3>\begin{equation} \begin{bmatrix} \cdots & 0.0 & 0.0 & 0.0 & 10.0 & 0.0 & 0.0 & \cdots \end{bmatrix} \end{equation}</h3>
-            <h3 class="center">After this data is passed in, the GPU can use the buffer in the calculation</h3>
+            <h3 class="buffer-rep transparent">\begin{equation} \begin{bmatrix} \cdots & 0.0 & 0.0 & 0.0 & 10.0 & 0.0 & 0.0 & \cdots \end{bmatrix} \end{equation}</h3>
+            <h3 class="center buffer-rep transparent">After this data is passed in, the GPU can use the buffer in the calculation</h3>
         </div>
         <div class="camera">
         </div>
-        <div class="sub-content">
+        <div class="sub-content note-rep transparent">
             <h4>After the GPU is done, the buffer must be cleared before the next cycle.</h4>
             <img class="bad-example" src="./assets/wave-eqn-bad.png" alt="When the buffer is not cleared">
         </div>
     </div>
-    <svg id="index-arrow" class="arrow" width="400" height="400" viewBox="0 0 30 30" fill="none">
+    <svg id="index-arrow buffer-rep transparent" class="arrow" width="400" height="400" viewBox="0 0 30 30" fill="none">
       <defs>
         <marker id="arrow-point" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M0,-5L6,0L0,5" class="arrowHead"></path>
@@ -75,14 +75,6 @@
     .cursor-annotate {
         position: absolute;
         transform: translate(18rem, 18rem);
-        opacity: 0;
-        transition: opacity 1s;
-    }
-
-    .main-content:hover .cursor-annotate {
-        opacity: 1;
-        transition: opacity 1s;
-        transition-delay: 0.4s;
     }
 
     .main-content:hover .cursor {
@@ -101,4 +93,40 @@
     #index-arrow {
         transform: translate(45rem, -38rem);
     }
+
+    .screen-rep, .analysis-rep, .buffer-rep, .note-rep {
+        transition: opacity 1s;
+    }
 </style>
+
+<script>
+    const stepReplicant = nodecg.Replicant("06-step", {devaultValue: 0});
+    NodeCG.waitForReplicants(stepReplicant).then(() => {
+        setupRadioReplicant(stepReplicant, [".screen-rep", ".analysis-rep", ".buffer-rep", ".note-rep"]);
+    });
+
+    function setupRadioReplicant(replicant, classNames) {
+        replicant.on('change', (newValue, oldValue) => {
+            console.log(newValue);
+            const changedElems = document.querySelectorAll(classNames.join(", "));
+            classNames.forEach((className, i) => {
+                const elems = document.querySelectorAll(className);
+                if (newValue > i) {
+                    elems.forEach((elem) => {
+                        elem.classList.remove("transparent");
+                        if (elem.classList.contains("cursor-ind")) {
+                            elem.classList.remove("cursor-orig-position");
+                        }
+                    });
+                } else {
+                    elems.forEach((elem) => {
+                        elem.classList.add("transparent");
+                        if (elem.classList.contains("cursor-ind")) {
+                            elem.classList.add("cursor-orig-position");
+                        }
+                    });
+                }
+            });
+        });
+    }
+</script>

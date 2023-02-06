@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="steps-06">Equation Steps</label><br>
+    <form id="steps-06" name="steps06">
+        <input type="radio" name="steps" type="number" value="0" checked/>Nothing
+        <input type="radio" name="steps" type="number" value="1"/>Screen
+        <input type="radio" name="steps" type="number" value="2"/>Screen Click
+        <input type="radio" name="steps" type="number" value="3"/>Buffer
+        <input type="radio" name="steps" type="number" value="4"/>Note
+    </form>
+</body>
+</html>
+
+<style>
+    input[type="radio"] {
+        display: table-cell;
+        vertical-align: middle;
+    }
+</style>
+
+<script>
+    const stepReplicant = nodecg.Replicant("06-step", {devaultValue: 0});
+    NodeCG.waitForReplicants(stepReplicant).then(() => {
+        setupRadioReplicant("#steps-06", "steps", stepReplicant);
+    });
+
+    function setupRadioReplicant(formId, btnName, replicant) {
+        const form = document.querySelector(formId);
+        form.addEventListener("click", (event) => {
+            replicant.value = parseInt(document.querySelector(`input[name = ${btnName}]:checked`).value, 10);
+        });
+        replicant.on("change", (newValue) => {
+            let checkedVal = parseInt(document.querySelector(`input[name = ${btnName}]:checked`).value, 10);
+            if (replicant.value != checkedVal) {
+                let selectedBtn = document.querySelector(`input[name = ${btnName}]:nth-child(${replicant.value + 1})`);
+                selectedBtn.checked = true;
+            }
+        });
+    }
+
+    function setupCheckReplicant(checkId, replicant) {
+        const checkBox = document.querySelector(checkId);
+        checkBox.addEventListener('change', (event) => {
+            replicant.value = event.currentTarget.checked;
+        });
+        replicant.on("change", (newValue) => {
+            if (replicant.value != checkBox.checked) {
+                checkBox.checked = replicant.value;
+            }
+        });
+    }
+</script>

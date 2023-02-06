@@ -32,6 +32,12 @@
         "file": "05-data.html"
       },
       {
+        "name": "06-clicks",
+        "title": "06: clicks",
+        "width": 3,
+        "file": "06-clicks.html"
+      },
+      {
         "name": "07-walls",
         "title": "07: Walls",
         "width": 3,
