@@ -9,11 +9,11 @@
 <body>
     <label for="steps-03">Equation Steps</label><br>
     <form id="steps-03" name="steps03">
-        <input id="nothing" type="radio" name="steps" type="number" value="0" checked/>Nothing
-        <input id="equation" type="radio" name="steps" type="number" value="1"/>Equation
-        <input id="helper" type="radio" name="steps" type="number" value="2"/>Helper Equation
-        <input id="substitution" type="radio" name="steps" type="number" value="3"/>Substitution
-        <input id="answer" type="radio" name="steps" type="number" value="4"/>Answer
+        <input type="radio" name="steps" type="number" value="0" checked/>Nothing
+        <input type="radio" name="steps" type="number" value="1"/>Equation
+        <input type="radio" name="steps" type="number" value="2"/>Helper Equation
+        <input type="radio" name="steps" type="number" value="3"/>Substitution
+        <input type="radio" name="steps" type="number" value="4"/>Answer
     </form>
 </body>
 </html>
@@ -27,20 +27,22 @@
 
 <script>
     const stepReplicant = nodecg.Replicant("03-step", {devaultValue: 0});
-    setupRadioReplicant("#steps-03", "steps", stepReplicant);
-    const steps = ["#nothing", "#equation", "#helper", "#substitution", "#answer"];
+    NodeCG.waitForReplicants(stepReplicant).then(() => {
+        setupRadioReplicant("#steps-03", "steps", stepReplicant);
+    });
 
     function setupRadioReplicant(formId, btnName, replicant) {
         const form = document.querySelector(formId);
         form.addEventListener("click", (event) => {
             replicant.value = parseInt(document.querySelector(`input[name = ${btnName}]:checked`).value, 10);
         });
-        //replicant.on("change", (newValue) => {
-        //    if (replicant.value != checkBox.checked) {
-        //        let selected = document.querySelector(steps[replicant.value]);
-        //        selcted.checked = true;
-        //    }
-        //});
+        replicant.on("change", (newValue) => {
+            let checkedVal = parseInt(document.querySelector(`input[name = ${btnName}]:checked`).value, 10);
+            if (replicant.value != checkedVal) {
+                let selectedBtn = document.querySelector(`input[name = ${btnName}]:nth-child(${replicant.value + 1})`);
+                selectedBtn.checked = true;
+            }
+        });
     }
 
     function setupCheckReplicant(checkId, replicant) {
