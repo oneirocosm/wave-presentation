@@ -19,10 +19,14 @@
             <h2 class="center">Inputs (Clicks)</h2>
             <h3 class="cursor-annotate">(i,j)</h3>
             <img src="./assets/cursor.png" alt="mouse" class="cursor">
-            <img class="mock-screen" src="./assets/wave-eqn-unclicked.png" alt="Screen before being clicked">
-            <h3>let index = i * screen_width + j;</h3>
+            <div class="click-example">
+                <img class="mock-screen" src="./assets/wave-eqn-unclicked.png" alt="Screen before being clicked">
+                <div class="center-xy">
+                    <h3 class="click-text">let index = i * screen_width + j;</h3>
+                </div>
+            </div>
             <h3>\begin{equation} \begin{bmatrix} \cdots & 0.0 & 0.0 & 0.0 & 10.0 & 0.0 & 0.0 & \cdots \end{bmatrix} \end{equation}</h3>
-            <h3>Once passed in, the GPU will use the buffer in the calculation</h3>
+            <h3 class="center">After this data is passed in, the GPU can use the buffer in the calculation</h3>
         </div>
         <div class="camera">
         </div>
@@ -31,13 +35,33 @@
             <img class="bad-example" src="./assets/wave-eqn-bad.png" alt="When the buffer is not cleared">
         </div>
     </div>
+    <svg id="index-arrow" class="arrow" width="400" height="400" viewBox="0 0 30 30" fill="none">
+      <defs>
+        <marker id="arrow-point" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M0,-5L6,0L0,5" class="arrowHead"></path>
+        </marker>
+      </defs>
+      <path d="M 10 5 L 10 14 C 10 15 10 15 9 15 L 1 15 C 0 15 0 15 0 16 L 0 20" stroke="currentColor" stroke-width="0.5" marker-end="url(#arrow-point)"></path>
+    </svg>
 </body>
 </html>
 
 <style>
     .mock-screen {
-        width: 30rem;
-        height: 30rem;
+        width: 28rem;
+        height: 28rem;
+    }
+
+    .click-example {
+        display: flex;
+        flex-direction: row;
+        padding: 5rem;
+        padding-bottom: 1rem;
+    }
+
+    .click-text {
+        text-align: center;
+        margin: 3rem;
     }
 
     .cursor {
@@ -72,5 +96,9 @@
     .bad-example {
         width: 20rem;
         margin: auto;
+    }
+
+    #index-arrow {
+        transform: translate(45rem, -38rem);
     }
 </style>
