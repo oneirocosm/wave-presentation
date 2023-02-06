@@ -40,7 +40,7 @@
         });
         replicant.on("change", (newValue) => {
             if (replicant.value != checkBox.checked) {
-                replicant.value = checkBox.checked;
+                checkBox.checked = replicant.value;
             }
         });
     }

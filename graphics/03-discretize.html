@@ -18,9 +18,9 @@
         <div class="main-content">
             <h2>Finite Difference Approximation:</h2>
             <div class="equation-space">
-                <h3 class="left-eqn">\begin{equation} \frac{1}{v^2}\frac{\partial^2u(x,y,t)}{{\partial t}^2} - \nabla^2u(x,y,t) = 0 \end{equation}</h3>
-                <p class="left-eqn helper-eqn">\begin{equation} \nabla^2u(x,y,t) \approx \frac{u(x + \Delta x, y, t) + u(x - \Delta x, y, t) + u(x, y + \Delta y, t) + u(x, y - \Delta y, t) -4u(x, y, z)}{(\Delta s)^2} \end{equation}</p>
-                <p class="left-eqn helper-eqn">\begin{equation} \frac{\partial^2u(x,y,t)}{{\partial t}^2} \approx \frac{u(x,y,t + \Delta t) + u(x, y, t - \Delta t) - 2u(x,y,t)}{(\Delta t)^2} \end{equation}</p>
+                <h3 class="left-eqn equation-rep transparent">\begin{equation} \frac{1}{v^2}\frac{\partial^2u(x,y,t)}{{\partial t}^2} - \nabla^2u(x,y,t) = 0 \end{equation}</h3>
+                <p class="left-eqn helper-eqn helpers-rep transparent">\begin{equation} \nabla^2u(x,y,t) \approx \frac{u(x + \Delta x, y, t) + u(x - \Delta x, y, t) + u(x, y + \Delta y, t) + u(x, y - \Delta y, t) -4u(x, y, z)}{(\Delta s)^2} \end{equation}</p>
+                <p class="left-eqn helper-eqn helpers-rep transparent">\begin{equation} \frac{\partial^2u(x,y,t)}{{\partial t}^2} \approx \frac{u(x,y,t + \Delta t) + u(x, y, t - \Delta t) - 2u(x,y,t)}{(\Delta t)^2} \end{equation}</p>
                 <br>
                 <br>
                 <br>
@@ -29,11 +29,11 @@
                 <br>
                 <br>
                 <br>
-                <hr>
+                <hr class="substitution-rep transparent">
                 <br>
                 <br>
-                <p class="left-eqn">\begin{equation} \frac{u(x,y,t + \Delta t) + u(x, y, t - \Delta t) - 2u(x,y,t)}{v^2(\Delta t)^2} - \frac{u(x + \Delta x, y, t) + u(x - \Delta x, y, t) + u(x, y + \Delta y, t) + u(x, y - \Delta y, t) -4u(x, y, z)}{(\Delta s)^2}  = 0 \end{equation}</p>
-                <p class="left-eqn answer">\begin{equation} u(x,y,t + \Delta t) = \frac{v^2(\Delta t)^2}{(\Delta s)^2} \Big[ u(x + \Delta x, y, t) + u(x - \Delta x, y, t) + u(x, y + \Delta y, t) + u(x, y - \Delta y, t) -4u(x, y, z) \Big] + 2u(x,y,t) - u(x, y, t - \Delta t) \end{equation}</p>
+                <p class="left-eqn substitution-rep transparent">\begin{equation} \frac{u(x,y,t + \Delta t) + u(x, y, t - \Delta t) - 2u(x,y,t)}{v^2(\Delta t)^2} - \frac{u(x + \Delta x, y, t) + u(x - \Delta x, y, t) + u(x, y + \Delta y, t) + u(x, y - \Delta y, t) -4u(x, y, z)}{(\Delta s)^2}  = 0 \end{equation}</p>
+                <p class="left-eqn answer answer-rep transparent">\begin{equation} u(x,y,t + \Delta t) = \frac{v^2(\Delta t)^2}{(\Delta s)^2} \Big[ u(x + \Delta x, y, t) + u(x - \Delta x, y, t) + u(x, y + \Delta y, t) + u(x, y - \Delta y, t) -4u(x, y, z) \Big] + 2u(x,y,t) - u(x, y, t - \Delta t) \end{equation}</p>
             </div>
         </div>
         <div class="camera">
@@ -61,4 +61,40 @@
         flex-direction: column;
         justify-items: left;
     }
+
+    .equation-rep, .helpers-rep, .substitution-rep, .answer-rep {
+        transition: opacity 1s;
+    }
 </style>
+
+<script>
+    const stepReplicant = nodecg.Replicant("03-step", {devaultValue: 0});
+    NodeCG.waitForReplicants(stepReplicant).then(() => {
+        setupRadioReplicant(stepReplicant, [".equation-rep", ".helpers-rep", ".substitution-rep", ".answer-rep"]);
+    });
+
+    function setupRadioReplicant(replicant, classNames) {
+        replicant.on('change', (newValue, oldValue) => {
+            console.log(newValue);
+            if (newValue > oldValue) {
+                const changedNames = classNames.slice(oldValue, newValue).join(", ");
+                if (changedNames.length == 0) {
+                    return;
+                }
+                const changedElems = document.querySelectorAll(changedNames);
+                changedElems.forEach((elem) => {
+                    elem.classList.remove("transparent");
+                });
+            } else {
+                const changedNames = classNames.slice(newValue, oldValue + 1).join(", ");
+                if (changedNames.length == 0) {
+                    return;
+                }
+                const changedElems = document.querySelectorAll(changedNames);
+                changedElems.forEach((elem) => {
+                    elem.classList.add("transparent");
+                });
+            }
+        });
+    }
+</script>
