@@ -76,25 +76,19 @@
     function setupRadioReplicant(replicant, classNames) {
         replicant.on('change', (newValue, oldValue) => {
             console.log(newValue);
-            if (newValue > oldValue) {
-                const changedNames = classNames.slice(oldValue, newValue).join(", ");
-                if (changedNames.length == 0) {
-                    return;
+            const changedElems = document.querySelectorAll(classNames.join(", "));
+            classNames.forEach((className, i) => {
+                const elems = document.querySelectorAll(className);
+                if (newValue > i) {
+                    elems.forEach((elem) => {
+                        elem.classList.remove("transparent");
+                    });
+                } else {
+                    elems.forEach((elem) => {
+                        elem.classList.add("transparent");
+                    });
                 }
-                const changedElems = document.querySelectorAll(changedNames);
-                changedElems.forEach((elem) => {
-                    elem.classList.remove("transparent");
-                });
-            } else {
-                const changedNames = classNames.slice(newValue, oldValue + 1).join(", ");
-                if (changedNames.length == 0) {
-                    return;
-                }
-                const changedElems = document.querySelectorAll(changedNames);
-                changedElems.forEach((elem) => {
-                    elem.classList.add("transparent");
-                });
-            }
+            });
         });
     }
 </script>
