@@ -26,6 +26,12 @@
         "file": "04-webgpu.html"
       },
       {
+        "name": "05-data",
+        "title": "05: data",
+        "width": 3,
+        "file": "05-data.html"
+      },
+      {
         "name": "07-walls",
         "title": "07: Walls",
         "width": 3,
