@@ -41,6 +41,22 @@
         <div class="sub-content">
         </div>
     </div>
+    <svg id="helper-arrow-1" class="arrow arrow-rep transparent" width="400" height="400" viewBox="0 0 30 30" fill="none">
+      <defs>
+        <marker id="arrow-point" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M0,-5L6,0L0,5" class="arrowHead"></path>
+        </marker>
+      </defs>
+      <path d="M 0 6 L 0 0" stroke="currentColor" stroke-width="0.5" marker-end="url(#arrow-point)"></path>
+    </svg>
+    <svg id="helper-arrow-2" class="arrow arrow-rep transparent" width="400" height="400" viewBox="0 0 30 30" fill="none">
+      <defs>
+        <marker id="arrow-point" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M0,-5L6,0L0,5" class="arrowHead"></path>
+        </marker>
+      </defs>
+      <path d="M 13 10 L 1 10 C 0 10 0 10 0 9 L 0 0" stroke="currentColor" stroke-width="0.5" marker-end="url(#arrow-point)"></path>
+    </svg>
 </body>
 </html>
 
@@ -62,15 +78,23 @@
         justify-items: left;
     }
 
-    .equation-rep, .helpers-rep, .substitution-rep, .answer-rep {
+    .equation-rep, .helpers-rep, .arrow-rep, .substitution-rep, .answer-rep {
         transition: opacity 1s;
+    }
+
+    #helper-arrow-1 {
+        transform: translate(31rem, -48rem);
+    }
+
+    #helper-arrow-2 {
+        transform: translate(15rem, -45rem);
     }
 </style>
 
 <script>
     const stepReplicant = nodecg.Replicant("03-step", {devaultValue: 0});
     NodeCG.waitForReplicants(stepReplicant).then(() => {
-        setupRadioReplicant(stepReplicant, [".equation-rep", ".helpers-rep", ".substitution-rep", ".answer-rep"]);
+        setupRadioReplicant(stepReplicant, [".equation-rep", ".helpers-rep", ".arrow-rep", ".substitution-rep", ".answer-rep"]);
     });
 
     function setupRadioReplicant(replicant, classNames) {
