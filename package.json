@@ -18,6 +18,12 @@
         "title": "07: Walls",
         "width": 3,
         "file": "07-walls.html"
+      },
+      {
+        "name": "08-energies",
+        "title": "08: Energies",
+        "width": 3,
+        "file": "08-energies.html"
       }
     ],
     "graphics": [

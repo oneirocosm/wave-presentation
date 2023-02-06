@@ -45,6 +45,46 @@
             </ul>
         </div>
     </div>
+    <svg id="accel-arrow" class="arrow accel-rep transparent" width="400" height="400" viewBox="0 0 30 30">
+      <defs>
+        <marker id="arrow-point" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M0,-5L6,0L0,5" class="arrowHead"></path>
+        </marker>
+      </defs>
+      <path d="M 0 10 L 0 0" stroke="currentColor" stroke-width="1" marker-end="url(#arrow-point)"></path>
+    </svg>
+    <svg id="laplace-arrow" class="arrow laplace-rep transparent" width="400" height="400" viewBox="0 0 30 30">
+      <defs>
+        <marker id="arrow-point" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M0,-5L6,0L0,5" class="arrowHead"></path>
+        </marker>
+      </defs>
+      <path d="M 0 10 L 0 0" stroke="currentColor" stroke-width="1" marker-end="url(#arrow-point)"></path>
+    </svg>
+    <svg id="speed-arrow" class="arrow speed-rep transparent" width="400" height="400" viewBox="0 0 30 30" fill="none">
+      <defs>
+        <marker id="arrow-point" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M0,-5L6,0L0,5" class="arrowHead"></path>
+        </marker>
+      </defs>
+      <path d="M 0 38 L 0 1 C 0 0 0 0 1 0 L 4 0" stroke="currentColor" stroke-width="1" marker-end="url(#arrow-point)"></path>
+    </svg>
+    <svg id="energy-arrow-1" class="arrow energy-rep transparent" width="400" height="400" viewBox="0 0 30 30" fill="none">
+      <defs>
+        <marker id="arrow-point" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M0,-5L6,0L0,5" class="arrowHead"></path>
+        </marker>
+      </defs>
+      <path d="M 57 30 L 53 30 C 52 30 52 30 52 29 L 52 1 C 52 0 52 0 51 0 L 1 0 C 0 0 0 0 0 1 L 0 4" stroke="currentColor" stroke-width="1" marker-end="url(#arrow-point)"></path>
+    </svg>
+    <svg id="energy-arrow-2" class="arrow energy-rep transparent" width="400" height="400" viewBox="0 0 30 30" fill="none">
+      <defs>
+        <marker id="arrow-point" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M0,-5L6,0L0,5" class="arrowHead"></path>
+        </marker>
+      </defs>
+      <path d="M 20 0 L 3 0 C 0 0 0 0 0 3 L 0 8" stroke="currentColor" stroke-width="1" marker-end="url(#arrow-point)"></path>
+    </svg>
 </body>
 </html>
 
@@ -77,6 +117,30 @@
         transition: opacity 1s;
     }
 
+    .speed-rep, .laplace-rep, .accel-rep, .energy-rep {
+        transition: opacity 1s;
+    }
+
+    #accel-arrow {
+        transform: translate(30rem, -36rem);
+    }
+
+    #laplace-arrow {
+        transform: translate(48rem, -40rem);
+    }
+
+    #speed-arrow {
+        transform: translate(12rem, -42rem);
+    }
+
+    #energy-arrow-1 {
+        transform: translate(20rem, -56rem);
+        width: 50rem;
+    }
+    #energy-arrow-2 {
+        transform: translate(39rem, -56rem);
+        width: 50rem;
+    }
 </style>
 
 <script>

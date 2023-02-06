@@ -86,6 +86,12 @@ p {
     opacity: 0;
 }
 
+.arrow {
+    position: absolute;
+    overflow: visible;
+    color: var(--color-chalk);
+}
+
 .eqn-num {
     display: none !important;
 }

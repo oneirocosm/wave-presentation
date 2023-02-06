@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="triangle-07">Triangle</label><br>
+    <form id="triangle-07" name="triangle07">
+        <input type="radio" name="triangle" type="number" value="0" checked/>Invisible
+        <input type="radio" name="triangle" type="number" value="1"/>Left Visible
+        <input type="radio" name="triangle" type="number" value="2"/>All Visible
+    </form>
+    <br/>
+    <br/>
+    <label for="square-07">Square</label><br>
+    <form id="square-07" name="square07">
+        <input type="radio" name="square" type="number" value="0" checked/>Invisible
+        <input type="radio" name="square" type="number" value="1"/>Left Visible
+        <input type="radio" name="square" type="number" value="2"/>All Visible
+    </form>
+    <br/>
+    <br/>
+    <label for="charjabug-07">Charjabug</label><br>
+    <form id="charjabug-07" name="charjabug07">
+        <input type="radio" name="charjabug" type="number" value="0" checked/>Invisible
+        <input type="radio" name="charjabug" type="number" value="1"/>Left Visible
+        <input type="radio" name="charjabug" type="number" value="2"/>All Visible
+    </form>
+    <br>
+    <br>
+    <input type="checkbox" id="note-07" name="note" value="Note">
+    <label for="note-07">Energy visible</label><br>
+    <button id="inc-cycle">Increment</button>
+    <button id="update">Update Energies</button>
+    <button id="reset">Reset Energies</button>
+</body>
+</html>
+
+<style>
+    input[type="radio"] {
+        display: table-cell;
+        vertical-align: middle;
+    }
+</style>
+
+<script>
+    const countReplicant = nodecg.Replicant("08-cycle", {devaultValue: 0});
+    const updateReplicant = nodecg.Replicant("08-update", {devaultValue: 0});
+    const resetReplicant = nodecg.Replicant("08-reset", {devaultValue: 0});
+    NodeCG.waitForReplicants(countReplicant).then(() => {
+        const cycleButton = document.querySelector("#inc-cycle");
+        const updateButton = document.querySelector("#update");
+        const resetButton = document.querySelector("#reset");
+        cycleButton.addEventListener("click", () => {
+            countReplicant.value = (countReplicant.value + 2) % 3;
+        });
+        updateButton.addEventListener("click", () => {
+            updateReplicant.value = !updateReplicant.value;
+        });
+        resetButton.addEventListener("click", () => {
+            resetReplicant.value = !resetReplicant.value;
+        });
+    });
+    countReplicant.on("change", (newValue, _) => {
+        console.log(newValue);
+    });
+
+    function setupRadioReplicant(formId, btnName, repName) {
+        const form = document.querySelector(formId);
+        const rep = nodecg.Replicant(repName, {devaultValue: 0});
+        form.addEventListener("click", (event) => {
+            rep.value = parseInt(document.querySelector(`input[name = ${btnName}]:checked`).value, 10);
+        });
+    }
+
+    function setupCheckReplicant(checkId, repName) {
+        const checkBox = document.querySelector(checkId);
+        const rep = nodecg.Replicant(repName, {devaultValue: false});
+        checkBox.addEventListener('change', (event) => {
+            rep.value = event.currentTarget.checked;
+        });
+    }
+</script>
