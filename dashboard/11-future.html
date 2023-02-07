@@ -5,17 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <label for="steps-03">Equation Steps</label><br>
-    <form id="steps-03" name="steps03">
+    <label for="steps-11">Equation Steps</label><br>
+    <form id="steps-11" name="steps11">
         <input type="radio" name="steps" type="number" value="0" checked/>Nothing
-        <input type="radio" name="steps" type="number" value="1"/>Equation
-        <input type="radio" name="steps" type="number" value="2"/>Helper Equation
-        <input type="radio" name="steps" type="number" value="3"/>Helper Arrows
-        <input type="radio" name="steps" type="number" value="4"/>Substitution
-        <input type="radio" name="steps" type="number" value="5"/>Answer
+        <input type="radio" name="steps" type="number" value="1"/>Dampening
+        <input type="radio" name="steps" type="number" value="2"/>Vertex-array
+        <input type="radio" name="steps" type="number" value="3"/>Resizeable Texture
+        <input type="radio" name="steps" type="number" value="4"/>Boundaries
+        <input type="radio" name="steps" type="number" value="5"/>Configurable
+        <input type="radio" name="steps" type="number" value="6"/>Framework
     </form>
 </body>
 </html>
@@ -28,9 +28,9 @@
 </style>
 
 <script>
-    const stepReplicant = nodecg.Replicant("03-step", {defaultValue: 0});
+    const stepReplicant = nodecg.Replicant("11-step", {defaultValue: 0});
     NodeCG.waitForReplicants(stepReplicant).then(() => {
-        setupRadioReplicant("#steps-03", "steps", stepReplicant);
+        setupRadioReplicant("#steps-11", "steps", stepReplicant);
     });
 
     function setupRadioReplicant(formId, btnName, replicant) {

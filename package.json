@@ -54,6 +54,12 @@
         "title": "09: Other",
         "width": 3,
         "file": "09-other.html"
+      },
+      {
+        "name": "11-future",
+        "title": "11: Future",
+        "width": 3,
+        "file": "11-future.html"
       }
     ],
     "graphics": [

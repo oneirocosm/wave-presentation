@@ -20,21 +20,63 @@
             <br>
             <br>
             <ul>
-                <h3><li>Grayscale input textures for dampening</li></h3>
-                <h3><li>Vertex Array of Energies instead of Fragment Array</li></h3>
-                <h3><li>Resizeable textures</li></h3>
-                <h3><li>Different boundary conditions</li></h3>
-                <h3><li>More configurable options</li></h3>
-                <h3><li>Integrate it into a framework</li></h3>
+                <h3 class="dampening transparent"><li>Grayscale input textures for dampening</li></h3>
+                <h3 class="vertex-array transparent"><li>Vertex Array of Energies instead of Fragment Array</li></h3>
+                <h3 class="resize transparent"><li>Resizeable textures</li></h3>
+                <h3 class="boundary transparent"><li>Different boundary conditions</li></h3>
+                <h3 class="configuration transparent"><li>More configurable options</li></h3>
+                <h3 class="framework transparent"><li>Integrate it into a framework</li></h3>
             </ul>
         </div>
         <div class="camera">
         </div>
-        <div class="sub-content">
+        <div class="sub-content pic-grid">
+            <img src="./assets/wave-eqn-damped.png" alt="Wave equation with dampening" class="dampening transparent">
+            <img src="./assets/wave-eqn-transform.png" alt="Wave equation with Resized Texture" class="resize transparent">
+            <img src="./assets/wave-eqn-saturatedpng.png" alt="Wave equation with inverted colors" class="configuration transparent">
+            <img src="./assets/inverted-color.png" alt="Wave equation with inverted colors" class="configuration transparent">
         </div>
     </div>
 </body>
 </html>
 
 <style>
+    .pic-grid {
+        display: grid;
+        grid: 1fr 1fr / 1fr 1fr;
+        row-gap: 2rem;
+    }
+    img {
+        width: 15rem;
+        height: 15rem;
+    }
+    .dampening, .vertex-array, .resize, .boundary, .configuration, .framework {
+        transition: opacity 1s;
+    }
 </style>
+
+<script>
+    const stepReplicant = nodecg.Replicant("11-step", {devaultValue: 0});
+    NodeCG.waitForReplicants(stepReplicant).then(() => {
+        setupRadioReplicant(stepReplicant, [".dampening", ".vertex-array", ".resize", ".boundary", ".configuration", ".framework"]);
+    });
+
+    function setupRadioReplicant(replicant, classNames) {
+        replicant.on('change', (newValue, oldValue) => {
+            console.log(newValue);
+            const changedElems = document.querySelectorAll(classNames.join(", "));
+            classNames.forEach((className, i) => {
+                const elems = document.querySelectorAll(className);
+                if (newValue > i) {
+                    elems.forEach((elem) => {
+                        elem.classList.remove("transparent");
+                    });
+                } else {
+                    elems.forEach((elem) => {
+                        elem.classList.add("transparent");
+                    });
+                }
+            });
+        });
+    }
+</script>
