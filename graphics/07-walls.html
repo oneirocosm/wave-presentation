@@ -123,33 +123,37 @@
 </style>
 
 <script>
-    setupRadioReplicant("07-triangle", [".left-triangle", ".right-triangle"]);
-    setupRadioReplicant("07-square", [".left-square", ".right-square"]);
-    setupRadioReplicant("07-charjabug", [".left-charjabug", ".right-charjabug"]);
-    setupCheckReplicant("07-note", ".note");
+    const triangleReplicant = nodecg.Replicant("07-triangle", {devaultValue: 0});
+    const squareReplicant = nodecg.Replicant("07-square", {devaultValue: 0});
+    const charjabugReplicant = nodecg.Replicant("07-charjabug", {devaultValue: 0});
+    const noteReplicant = nodecg.Replicant("07-note", {devaultValue: false});
+    
+    NodeCG.waitForReplicants(triangleReplicant, squareReplicant, charjabugReplicant, noteReplicant).then(() => {
+        setupRadioReplicant(triangleReplicant, [".left-triangle", ".right-triangle"]);
+        setupRadioReplicant(squareReplicant, [".left-square", ".right-square"]);
+        setupRadioReplicant(charjabugReplicant, [".left-charjabug", ".right-charjabug"]);
+        setupCheckReplicant(noteReplicant, ".note");
+    });
 
-    function setupRadioReplicant(repName, classNames) {
-        const replicant = nodecg.Replicant(repName, {defaultValue: 0});
-
+    function setupRadioReplicant(replicant, classNames) {
         replicant.on('change', (newValue, oldValue) => {
-            if (newValue > oldValue) {
-                const changedNames = classNames.slice(oldValue, newValue).join(", ");
-                const changedElems = document.querySelectorAll(changedNames);
-                changedElems.forEach((elem) => {
-                    elem.classList.remove("transparent");
-                });
-            } else {
-                const changedNames = classNames.slice(newValue, oldValue + 1).join(", ");
-                const changedElems = document.querySelectorAll(changedNames);
-                changedElems.forEach((elem) => {
-                    elem.classList.add("transparent");
-                });
-            }
+            const changedElems = document.querySelectorAll(classNames.join(", "));
+            classNames.forEach((className, i) => {
+                const elems = document.querySelectorAll(className);
+                if (newValue > i) {
+                    elems.forEach((elem) => {
+                        elem.classList.remove("transparent");
+                    });
+                } else {
+                    elems.forEach((elem) => {
+                        elem.classList.add("transparent");
+                    });
+                }
+            });
         });
     }
 
-    function setupCheckReplicant(repName, className) {
-        const replicant = nodecg.Replicant(repName, {defaultValue: false});
+    function setupCheckReplicant(replicant, className) {
         const elems = document.querySelectorAll(className);
 
         replicant.on('change', (newValue, oldValue) => {
@@ -164,5 +168,4 @@
             }
         });
     }
-
 </script>
