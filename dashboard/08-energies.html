@@ -7,6 +7,15 @@
     <title>Document</title>
 </head>
 <body>
+    <ul>
+        <li>We need to track three cycles at once</li>
+        <li>Two to pull data from and one to write to</li>
+        <li>To keep things efficient we use a ring buffer</li>
+        <li>We have a current cycle that changes over time</li>
+        <li>We will write to the current cycle using the other two</li>
+        <li>It is important that we do not use the current cycle to get the new energy since other threads will be mutating this area in memory</li>
+        <li>We never send the data back to the CPU.  It lives here instead.  We still need the buffer since it allows data in the GPU to persist across different calls</li>
+    </ul>
     <label for="step-08">Steps</label><br>
     <form id="step-08" name="step08">
         <input type="radio" name="step" type="number" value="0" checked/>Invisible

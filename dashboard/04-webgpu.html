@@ -7,6 +7,14 @@
     <title>Document</title>
 </head>
 <body>
+    <h3>notes:</h3>
+    <ul>
+        <li>Most of what I'm saying isn't explicitly about WebGPU and can apply to other frameworks</li>
+        <li>There's a lot of boilerplate going on.  I'm going to skip over it because it doesn't contribute to the big picture idea</li>
+        <li>The most important thing is that we have cpu data that we need to put into a GPU buffer</li>
+        <li>If there are many different things that need to be sent over, it sometimes makes sense to use one buffer for each thing.</li>
+        <li>There are some limitations on the number of buffers due to hardware</li>
+    </ul>
     <label for="data-04">Specific Case</label><br>
     <form id="data-04" name="step03">
         <input type="radio" name="data" type="number" value="0" checked/>Nothing

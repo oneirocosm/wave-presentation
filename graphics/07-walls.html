@@ -41,6 +41,30 @@
             <h3>In this case, nearest neighbor works well</h3>
         </div>
     </div>
+    <svg id="transform-arrow-1" class="arrow right-triangle transparent" width="400" height="400" viewBox="0 0 30 30" fill="none">
+      <defs>
+        <marker id="arrow-point" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M0,-5L6,0L0,5" class="arrowHead"></path>
+        </marker>
+      </defs>
+      <path d="M 0 0 25 0" stroke="currentColor" stroke-width="0.7" marker-end="url(#arrow-point)"></path>
+    </svg>
+    <svg id="transform-arrow-2" class="arrow right-square transparent" width="400" height="400" viewBox="0 0 30 30" fill="none">
+      <defs>
+        <marker id="arrow-point" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M0,-5L6,0L0,5" class="arrowHead"></path>
+        </marker>
+      </defs>
+      <path d="M 0 0 25 0" stroke="currentColor" stroke-width="0.7" marker-end="url(#arrow-point)"></path>
+    </svg>
+    <svg id="transform-arrow-3" class="arrow right-charjabug transparent" width="400" height="400" viewBox="0 0 30 30" fill="none">
+      <defs>
+        <marker id="arrow-point" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M0,-5L6,0L0,5" class="arrowHead"></path>
+        </marker>
+      </defs>
+      <path d="M 0 0 25 0" stroke="currentColor" stroke-width="0.7" marker-end="url(#arrow-point)"></path>
+    </svg>
 </body>
 </html>
 
@@ -74,7 +98,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        transition: opacity 1s;
     }
 
     .tri-convert {
@@ -82,7 +105,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        transition: opacity 1s;
     }
 
     .square-base {
@@ -90,7 +112,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        transition: opacity 1s;
     }
 
     .square-convert {
@@ -98,7 +119,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        transition: opacity 1s;
     }
 
     .complex-base {
@@ -106,7 +126,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        transition: opacity 1s;
     }
 
     .complex-convert {
@@ -114,11 +133,25 @@
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    .left-triangle, .right-triangle, .left-square, .right-square, .left-charjabug, .right-charjabug, .note {
         transition: opacity 1s;
     }
 
-    .note {
-        transition: opacity 1s;
+    #transform-arrow-1 {
+        position: absolute;
+        transform: translate(30rem, -40rem);
+    }
+
+    #transform-arrow-2 {
+        position: absolute;
+        transform: translate(30rem, -24.5rem);
+    }
+
+    #transform-arrow-3 {
+        position: absolute;
+        transform: translate(30rem, -9rem);
     }
 </style>
 

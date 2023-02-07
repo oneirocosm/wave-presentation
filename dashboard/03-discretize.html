@@ -8,6 +8,16 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
+    <h3>notes:</h3>
+    <ul>
+        <li>Imagine a 2d grid with points equally spaced.  We will use same distance in x and y directions</li>
+        <li>Similarly, we can imagine a small step in time looking forward and backward</li>
+        <li>Approximations made using taylor series.  It's sort of like taking the average of one point and the next.  The second derviatives complicate it though</li>
+        <li>This gives the next cycle in terms of the current and the last</li>
+        <li>It does not give us boundary conditions, think of the walls of a tub of water.</li>
+        <li>The data is very local -- it's only based on nearby area.  This makes it parallelizable</li>
+        <li>This makes it good for graphics</li>
+    </ul>
     <label for="steps-03">Equation Steps</label><br>
     <form id="steps-03" name="steps03">
         <input type="radio" name="steps" type="number" value="0" checked/>Nothing
