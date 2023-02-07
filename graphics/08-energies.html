@@ -17,28 +17,28 @@
     <div class="layout">
         <div class="main-content inner-grid">
             <h2 class="center title">Energies</h2>
-            <div class="center-xy">
+            <div class="center-xy matrix-rep transparent">
                 <h4 id="arr01">\begin{equation} \begin{bmatrix} 0.0 & 0.0 & 0.0 & 0.0 \\ 0.0 & 0.0 & 0.0 & 0.0 \\ 0.0 & 0.0 & 0.0 & 0.0 \\ 0.0 & 0.0 & 0.0 & 0.0 \end{bmatrix} \end{equation}</h4>
             </div>
-            <div class="center-y">
+            <div class="center-y count-rep transparent">
                 <h3 id="desc01">2 cycles ago</h3>
             </div>
-            <div class="center-xy">
+            <div class="center-xy matrix-rep transparent">
                 <h4 id="arr02">\begin{equation} \begin{bmatrix} 0.0 & 0.0 & 0.0 & 0.0 \\ 0.0 & 0.0 & 0.0 & 0.0 \\ 0.0 & 0.0 & 0.0 & 0.0 \\ 0.0 & 0.0 & 0.0 & 0.0 \end{bmatrix} \end{equation}</h4>
             </div>
-            <div class="center-y">
+            <div class="center-y count-rep transparent">
                 <h3 id="desc02">1 cycle ago</h3>
             </div>
-            <div class="center-xy">
+            <div class="center-xy matrix-rep transparent">
                 <h4 id="arr03">\begin{equation} \begin{bmatrix} 0.0 & 0.0 & 0.0 & 0.0 \\ 0.0 & 0.0 & 0.0 & 0.0 \\ 0.0 & 0.0 & 0.0 & 0.0 \\ 0.0 & 0.0 & 0.0 & 0.0 \end{bmatrix} \end{equation}</h4>
             </div>
-            <div class="center-y">
+            <div class="center-y count-rep transparent">
                 <h3 id="desc03">current cycle<br>(write here)</h3>
             </div>
         </div>
         <div class="camera">
         </div>
-        <div class="sub-content">
+        <div class="sub-content note-rep">
             <h3>These values are never sent back to the CPU!</h3>
         </div>
     </div>
@@ -64,6 +64,10 @@
         display: flex;
         align-items: center;
     }
+
+    .matrix-rep, .count-rep, .note-rep {
+        transition: opacity 1s;
+    }
 </style>
 
 <script>
@@ -71,32 +75,32 @@
     const arrs = ["arr01", "arr02", "arr03"];
     const possibleContent = ["2 cycles ago", "1 cycle ago", "current cycle<br>(write here)"];
     const cycleReplicant = nodecg.Replicant("08-cycle", {defaultValue: 0});
-    setupCycleReplicant(cycleReplicant, ids, possibleContent);
-    const updateReplicant = nodecg.Replicant("08-update", {devaultValue: 0});
-    const resetReplicant = nodecg.Replicant("08-reset", {devaultValue: 0});
+    const updateReplicant = nodecg.Replicant("08-update", {defaultValue: 0});
+    const resetReplicant = nodecg.Replicant("08-reset", {defaultValue: 0});
+    const stepReplicant = nodecg.Replicant("08-step", {defaultValue: 0});
     NodeCG.waitForReplicants(cycleReplicant, updateReplicant, resetReplicant).then(() => {
-
-    });
-    updateReplicant.on("change", () => {
-        // randomly set 5 values nonzero
-        const values = Array(16).fill((0.0).toFixed(1));
-        const randInds = Array(5).fill(0.0).map(() => Math.floor(Math.random()*16));
-        randInds.forEach((ind) => {
-            values[ind] = (Math.random() * 10).toFixed(1);
-        })
-        const eqn = `\\begin{bmatrix} ${values[0]} & ${values[1]} & ${values[2]} & ${values[3]} \\\\ ${values[4]} & ${values[5]} & ${values[6]} & ${values[7]} \\\\ ${values[8]} & ${values[9]} & ${values[10]} & ${values[11]} \\\\ ${values[12]} & ${values[13]} & ${values[14]} & ${values[15]} \\end{bmatrix}`;
-        const id = arrs[(2-(cycleReplicant.value) % 3)];
-        const elem = document.getElementById(id);
-        katex.render(eqn, elem, {throwOnError: true});
-    });
-
-    resetReplicant.on("change", () => {
-        const zeros = "\\begin{bmatrix} 0.0 & 0.0 & 0.0 & 0.0 \\\\ 0.0 & 0.0 & 0.0 & 0.0 \\\\ 0.0 & 0.0 & 0.0 & 0.0 \\\\ 0.0 & 0.0 & 0.0 & 0.0 \\end{bmatrix}"
-        const arrays = ["arr01", "arr02", "arr03"];
-        arrays.forEach((arrId) => {
-            const elem = document.getElementById(arrId);
-            katex.render(zeros, elem, {throwOnError: true});
+        updateReplicant.on("change", () => {
+            // randomly set 5 values nonzero
+            const values = Array(16).fill((0.0).toFixed(1));
+            const randInds = Array(5).fill(0.0).map(() => Math.floor(Math.random()*16));
+            randInds.forEach((ind) => {
+                values[ind] = (Math.random() * 10).toFixed(1);
+            })
+            const eqn = `\\begin{bmatrix} ${values[0]} & ${values[1]} & ${values[2]} & ${values[3]} \\\\ ${values[4]} & ${values[5]} & ${values[6]} & ${values[7]} \\\\ ${values[8]} & ${values[9]} & ${values[10]} & ${values[11]} \\\\ ${values[12]} & ${values[13]} & ${values[14]} & ${values[15]} \\end{bmatrix}`;
+            const id = arrs[(2-(cycleReplicant.value) % 3)];
+            const elem = document.getElementById(id);
+            katex.render(eqn, elem, {throwOnError: true});
         });
+        resetReplicant.on("change", () => {
+            const zeros = "\\begin{bmatrix} 0.0 & 0.0 & 0.0 & 0.0 \\\\ 0.0 & 0.0 & 0.0 & 0.0 \\\\ 0.0 & 0.0 & 0.0 & 0.0 \\\\ 0.0 & 0.0 & 0.0 & 0.0 \\end{bmatrix}"
+            const arrays = ["arr01", "arr02", "arr03"];
+            arrays.forEach((arrId) => {
+                const elem = document.getElementById(arrId);
+                katex.render(zeros, elem, {throwOnError: true});
+            });
+        });
+        setupCycleReplicant(cycleReplicant, ids, possibleContent);
+        setupRadioReplicant(stepReplicant, [".matrix-rep", ".count-rep", ".note-rep"]);
     });
 
     function setupCycleReplicant(replicant, ids, possibleContent) {
@@ -106,6 +110,23 @@
                 const elem = document.getElementById(id);
                 const index = (newValue + i) % 3;
                 elem.innerHTML = possibleContent[index];
+            });
+        });
+    }
+
+    function setupRadioReplicant(replicant, classNames) {
+        replicant.on('change', (newValue, oldValue) => {
+            classNames.forEach((className, i) => {
+                const elems = document.querySelectorAll(className);
+                if (newValue > i) {
+                    elems.forEach((elem) => {
+                        elem.classList.remove("transparent");
+                    });
+                } else {
+                    elems.forEach((elem) => {
+                        elem.classList.add("transparent");
+                    });
+                }
             });
         });
     }

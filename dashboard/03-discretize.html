@@ -27,7 +27,7 @@
 </style>
 
 <script>
-    const stepReplicant = nodecg.Replicant("03-step", {devaultValue: 0});
+    const stepReplicant = nodecg.Replicant("03-step", {defaultValue: 0});
     NodeCG.waitForReplicants(stepReplicant).then(() => {
         setupRadioReplicant("#steps-03", "steps", stepReplicant);
     });
