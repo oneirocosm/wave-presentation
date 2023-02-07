@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="list-09">Equation Steps</label><br>
+    <form id="list-09" name="steps03">
+        <input type="radio" name="list" type="number" value="0" checked/>Nothing
+        <input type="radio" name="list" type="number" value="1"/>Plenty of other useful
+        <input type="radio" name="list" type="number" value="2"/>Count
+        <input type="radio" name="list" type="number" value="3"/>Width / Height
+        <input type="radio" name="list" type="number" value="4"/>Configurables
+    </form>
+</body>
+</html>
+
+<style>
+    input[type="radio"] {
+        display: table-cell;
+        vertical-align: middle;
+    }
+</style>
+
+<script>
+    const stepReplicant = nodecg.Replicant("09-list", {defaultValue: 0});
+    NodeCG.waitForReplicants(stepReplicant).then(() => {
+        setupRadioReplicant("#list-09", "list", stepReplicant);
+    });
+
+    function setupRadioReplicant(formId, btnName, replicant) {
+        const form = document.querySelector(formId);
+        form.addEventListener("click", (event) => {
+            replicant.value = parseInt(document.querySelector(`input[name = ${btnName}]:checked`).value, 10);
+        });
+        replicant.on("change", (newValue) => {
+            let checkedVal = parseInt(document.querySelector(`input[name = ${btnName}]:checked`).value, 10);
+            if (replicant.value != checkedVal) {
+                let selectedBtn = document.querySelector(`input[name = ${btnName}]:nth-child(${replicant.value + 1})`);
+                selectedBtn.checked = true;
+            }
+        });
+    }
+</script>

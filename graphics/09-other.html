@@ -17,13 +17,13 @@
             <br>
             <br>
             <br>
-            <h3>Plenty of other useful things can be sent to the GPU</h3>
+            <h3 class="statement-rep transparent">Plenty of other useful things can be sent to the GPU</h3>
             <br>
             <br>
             <ul>
-                <h3><li>The current cycle count</li></h3>
-                <h3><li>The width and height of the screen</li></h3>
-                <h3><li>Any configurables on the webpage (not implemented yet)</li></h3>
+                <h3 class="elem1-rep transparent"><li>The current cycle count</li></h3>
+                <h3 class="elem2-rep transparent"><li>The width and height of the screen</li></h3>
+                <h3 class="elem3-rep transparent"><li>Any configurables on the webpage (not implemented yet)</li></h3>
             </ul>
         </div>
         <div class="camera">
@@ -35,4 +35,33 @@
 </html>
 
 <style>
+    .statement-rep, .elem1-rep, .elem2-rep, .elem3-rep {
+        transition: opacity 1s;
+    }
 </style>
+
+<script>
+    const stepReplicant = nodecg.Replicant("09-list", {devaultValue: 0});
+    NodeCG.waitForReplicants(stepReplicant).then(() => {
+        setupRadioReplicant(stepReplicant, [".statement-rep", ".elem1-rep", ".elem2-rep", ".elem3-rep"]);
+    });
+
+    function setupRadioReplicant(replicant, classNames) {
+        replicant.on('change', (newValue, oldValue) => {
+            console.log(newValue);
+            const changedElems = document.querySelectorAll(classNames.join(", "));
+            classNames.forEach((className, i) => {
+                const elems = document.querySelectorAll(className);
+                if (newValue > i) {
+                    elems.forEach((elem) => {
+                        elem.classList.remove("transparent");
+                    });
+                } else {
+                    elems.forEach((elem) => {
+                        elem.classList.add("transparent");
+                    });
+                }
+            });
+        });
+    }
+</script>

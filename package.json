@@ -48,6 +48,12 @@
         "title": "08: Energies",
         "width": 3,
         "file": "08-energies.html"
+      },
+      {
+        "name": "09-other",
+        "title": "09: Other",
+        "width": 3,
+        "file": "09-other.html"
       }
     ],
     "graphics": [

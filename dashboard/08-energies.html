@@ -59,7 +59,6 @@
             replicant.value = parseInt(document.querySelector(`input[name = ${btnName}]:checked`).value, 10);
         });
         replicant.on("change", (newValue) => {
-            //console.log("here");
             let checkedVal = parseInt(document.querySelector(`input[name = ${btnName}]:checked`).value, 10);
             if (replicant.value != checkedVal) {
                 let selectedBtn = document.querySelector(`input[name = ${btnName}]:nth-child(${replicant.value + 1})`);
