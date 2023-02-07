@@ -18,7 +18,7 @@
         <div class="main-content">
             <h2 class="center">Inputs (Clicks)</h2>
             <h3 class="cursor-annotate analysis-rep transparent">(i,j)</h3>
-            <img src="./assets/cursor.png" alt="mouse" class="cursor">
+            <img src="./assets/cursor.png" alt="mouse" class="cursor cursor-orig-position analysis-rep transparent">
             <div class="click-example">
                 <img class="mock-screen screen-rep transparent" src="./assets/wave-eqn-unclicked.png" alt="Screen before being clicked">
                 <div class="center-xy">
@@ -35,7 +35,7 @@
             <img class="bad-example" src="./assets/wave-eqn-bad.png" alt="When the buffer is not cleared">
         </div>
     </div>
-    <svg id="index-arrow buffer-rep transparent" class="arrow" width="400" height="400" viewBox="0 0 30 30" fill="none">
+    <svg id="index-arrow" class="arrow buffer-rep transparent" width="400" height="400" viewBox="0 0 30 30" fill="none">
       <defs>
         <marker id="arrow-point" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M0,-5L6,0L0,5" class="arrowHead"></path>
@@ -67,9 +67,11 @@
     .cursor {
         width: 3rem;
         position: absolute;
+        transform: translate(22rem, 22rem);
+    }
+
+    .cursor.cursor-orig-position {
         transform: translate(31rem, 31rem);
-        opacity: 0;
-        transition: transform 1s, opacity 1s;
     }
 
     .cursor-annotate {
@@ -80,7 +82,6 @@
     .main-content:hover .cursor {
         width: 3rem;
         position: absolute;
-        transform: translate(22rem, 22rem);
         opacity: 1;
         transition: transform 1s, opacity 1s;
     }
@@ -91,11 +92,19 @@
     }
 
     #index-arrow {
+        position: absolute;
         transform: translate(45rem, -38rem);
     }
 
     .screen-rep, .analysis-rep, .buffer-rep, .note-rep {
         transition: opacity 1s;
+    }
+    .analysis-rep {
+        transition-delay: 0.4s;
+    }
+    .cursor.analysis-rep {
+        transition: opacity 1s, transform 1s ease-out;
+        transition-delay: 0;
     }
 </style>
 
@@ -114,14 +123,14 @@
                 if (newValue > i) {
                     elems.forEach((elem) => {
                         elem.classList.remove("transparent");
-                        if (elem.classList.contains("cursor-ind")) {
+                        if (elem.classList.contains("cursor")) {
                             elem.classList.remove("cursor-orig-position");
                         }
                     });
                 } else {
                     elems.forEach((elem) => {
                         elem.classList.add("transparent");
-                        if (elem.classList.contains("cursor-ind")) {
+                        if (elem.classList.contains("cursor")) {
                             elem.classList.add("cursor-orig-position");
                         }
                     });
